@@ -44,7 +44,7 @@ export const Board: FunctionComponent<Props> = ({
         if (check) {
 
             setFounded([...founded, ...pairing])
-            console.log('founded')
+
         }
 
     }
