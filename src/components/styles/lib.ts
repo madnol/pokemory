@@ -37,7 +37,7 @@ background-image: url('https://cdn.dribbble.com/users/51395/screenshots/2859472/
    
 `
 
-export const Pokemon = styled.img`
+export const PokeCard = styled.img`
 width: 80%;
 `
 
@@ -48,3 +48,21 @@ export const PlayGround = styled(animated.div)`
   grid-gap: 10px;
    
 `
+
+// export const Button = styled.button`
+//     border-radius: 50px;
+//     border:none;
+//     background-color: #F2744E;
+//     color: #fff;
+//     font-weight: bold;
+//     padding:12px 24px;
+//     margin:20px;
+//     transition: filter .5s ease-in-out;
+//     &:hover {
+//         filter: drop-shadow(0 0 0.5rem rgba(63, 81, 181,0.5));
+//     };
+//     &:active {
+//         background-color: #F57A65;  
+//     }
+    
+// `

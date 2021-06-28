@@ -1,21 +1,21 @@
 import React, { FunctionComponent, useState } from 'react'
 import { useSpring } from 'react-spring'
+import { Pokemon } from '../../types/pokemon/pokemon'
 
 
 
-import { Front, Back, CardWrapper, Pokemon } from '../styles/lib'
+import { Front, Back, CardWrapper, PokeCard } from '../styles/lib'
 
 export interface Props {
-    image: string;
-    text?: string;
-    pairing: string[];
-    handlePairing: (image: string) => void;
+    pokemon: Pokemon;
+    pairing: Pokemon[];
+    founded?: Pokemon[];
+    handlePairing: (pokemon: Pokemon) => void;
 }
 
 
 export const Card: FunctionComponent<Props> = ({
-    image,
-    text,
+    pokemon,
     pairing,
     handlePairing,
     ...otherProps
@@ -28,16 +28,19 @@ export const Card: FunctionComponent<Props> = ({
         config: { mass: 5, tension: 500, friction: 80 }
     })
 
-    const flip = (sprite: string) => {
+
+    const flip = (pokemon: Pokemon) => {
         pairing.length <= 1 && setFlipped(!flipped)
-        pairing.length <= 1 && handlePairing(sprite)
+        pairing.length <= 1 && handlePairing(pokemon)
     }
 
+
+
     return (
-        < CardWrapper onClick={() => flip(image)} >
+        < CardWrapper onClick={() => flip(pokemon)} >
             <Back style={{ opacity: opacity.to(o => 1 - o), transform }} ></Back>
             <Front style={{ opacity, transform: transform.to(t => `${t} rotateX(180deg)`) }}>
-                {image && <Pokemon src={image} alt="pokemon" />}
+                {pokemon?.sprite && <PokeCard src={pokemon.sprite} alt="pokemon" />}
             </Front>
         </CardWrapper >
     )
