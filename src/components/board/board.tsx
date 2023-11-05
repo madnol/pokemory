@@ -122,7 +122,7 @@ export const Board: FunctionComponent<Props> = ({ ...otherProps }) => {
         flexDirection: "row",
         flexGrow: 1,
         gap: "5em",
-        justifyContent: "center",
+        // justifyContent: "center",
       }}
     >
       <FlippedDeck>
@@ -132,10 +132,6 @@ export const Board: FunctionComponent<Props> = ({ ...otherProps }) => {
           ?.map((filterdCard, index, cards) => {
             return (
               <Card
-                style={{
-                  border: "1px solid black",
-                  borderRadius: 20,
-                }}
                 title={filterdCard.name}
                 image={filterdCard.sprite}
                 key={index}
@@ -188,7 +184,7 @@ export default Board;
 const FlippedDeck = styled(animated.div)`
   overflow: scroll;
   position: relative;
-  padding: 20px;
+  margin: 20px;
   scroll-behavior: smooth;
   &::-webkit-scrollbar {
     width: 0;
