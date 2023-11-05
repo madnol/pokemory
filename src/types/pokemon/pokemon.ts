@@ -1,6 +1,6 @@
-
 export type Pokemon = {
-    sprite:string;
-    faceUp:boolean;
-}
-
+  id: string;
+  name: string;
+  sprite: string;
+  matched: boolean;
+};

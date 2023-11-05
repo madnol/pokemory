@@ -1,58 +1,64 @@
-import React, { FunctionComponent, useState } from 'react'
-import { useSpring } from 'react-spring'
-import { Pokemon } from '../../types/pokemon/pokemon'
+import React, {
+  FunctionComponent,
+  useCallback,
+  useEffect,
+  HTMLProps,
+} from "react";
 
-
-
-import { Front, Back, CardWrapper, PokeCard } from '../styles/lib'
-
-export interface Props {
-    pokemon: Pokemon;
-    pairing: Pokemon[];
-    founded?: Pokemon[];
-    handlePairing: (pokemon: Pokemon) => void;
+import * as styled from "./card.styled";
+import { useSpring } from "@react-spring/web";
+export interface Props extends HTMLProps<HTMLDivElement> {
+  image: string;
+  title?: string;
+  isFlipped: boolean;
+  onClick?: () => void;
 }
 
+export const Card: FunctionComponent<Props> = (props: Props) => {
+  const { image, title, isFlipped, onClick, ...otherProps } = props;
+  // const [flipped, setFlipped] = useState<boolean>(false);
 
-export const Card: FunctionComponent<Props> = ({
-    pokemon,
-    pairing,
-    handlePairing,
-    ...otherProps
-}) => {
-    const [flipped, setFlipped] = useState<boolean>(false)
+  const { opacity, transform } = useSpring({
+    opacity: isFlipped ? 1 : 0,
+    transform: `perspective(600px) rotateX(${isFlipped ? 180 : 0}deg)`,
+    config: { mass: 5, tension: 500, friction: 80 },
+  });
 
-    const { opacity, transform } = useSpring({
-        opacity: flipped ? 1 : 0,
-        transform: `perspective(600px) rotateX(${flipped ? 180 : 0}deg)`,
-        config: { mass: 5, tension: 500, friction: 80 }
-    })
+  const handleFlip = useCallback(() => {
+    console.log(otherProps.id);
+    if (isFlipped) return;
+    onClick && onClick();
 
+    console.log();
+    // setFlipped(!isFlipped);
+    new Audio("https://www.soundjay.com/misc/sounds/page-flip-01a.mp3").play();
+  }, [isFlipped, onClick, otherProps.id]);
 
-    const flip = (pokemon: Pokemon) => {
-        pairing.length <= 1 && setFlipped(!flipped)
-        pairing.length <= 1 && handlePairing(pokemon)
-    }
+  useEffect(() => console.log({ title, isFlipped }), [isFlipped, title]);
 
-
-
-    return (
-        < CardWrapper onClick={() => flip(pokemon)} >
-            <Back style={{ opacity: opacity.to(o => 1 - o), transform }} ></Back>
-            <Front style={{ opacity, transform: transform.to(t => `${t} rotateX(180deg)`) }}>
-                {pokemon?.sprite && <PokeCard src={pokemon.sprite} alt="pokemon" />}
-            </Front>
-        </CardWrapper >
-    )
-}
-
-
-
-
-
-
-
-
-
+  return (
+    <styled.Card onClick={handleFlip} {...otherProps}>
+      <styled.Back
+        style={{
+          opacity: opacity.to((o) => {
+            return 1 - o;
+          }),
+          transform,
+        }}
+      />
+      <styled.Front
+        style={{
+          opacity,
+          transform: transform.to((t) => {
+            return `${t} rotateX(180deg)`;
+          }),
+        }}
+      >
+        {<styled.PokeCard src={image} alt="Card front" />}
+        <styled.PokeName>{title}</styled.PokeName>
+      </styled.Front>
+    </styled.Card>
+  );
+};
 
 export default Card;
