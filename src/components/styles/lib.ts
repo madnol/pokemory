@@ -1,5 +1,5 @@
-import { animated } from "@react-spring/web";
-import styled from "styled-components";
+import { animated } from '@react-spring/web';
+import styled from 'styled-components';
 // import { animated } from "react-spring";
 
 export const Front = styled(animated.div)`
@@ -9,7 +9,7 @@ export const Front = styled(animated.div)`
 `;
 
 export const Back = styled(animated.div)`
-  background-image: url("https://cdn.dribbble.com/users/51395/screenshots/2859472/pokemon_go_01.gif");
+  background-image: url('https://cdn.dribbble.com/users/51395/screenshots/2859472/pokemon_go_01.gif');
 `;
 
 export const PokeCard = styled.img`

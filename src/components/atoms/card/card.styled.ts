@@ -1,14 +1,15 @@
-import { animated } from "@react-spring/web";
-import styled from "styled-components";
+import { animated } from '@react-spring/web';
+import styled from 'styled-components';
 
 export const Card = styled.div`
-  display: "flex";
-
+  --card-skeleton: ;
   align-items: center;
   justify-content: center;
-  width: 20ch;
-  height: 22ch;
-  transition: filter 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  width: 14ch;
+  height: 14ch;
+  transition:
+    filter 0.5s ease-in-out,
+    opacity 0.5s ease-in-out;
   margin: 0 auto;
   &:hover {
     filter: drop-shadow(0 0 0.5rem rgba(63, 81, 181, 0.5));
@@ -16,8 +17,8 @@ export const Card = styled.div`
   & > div {
     position: absolute;
     border-radius: 20px;
-    width: 20ch;
-    height: 20ch;
+    width: 14ch;
+    height: 14ch;
     background-color: #ecf0f1;
     background-size: cover;
     background-position: center;
@@ -29,7 +30,7 @@ export const Card = styled.div`
 export const Front = styled(animated.div)`
   display: flex;
   flex-direction: column;
-  padding-bottom: 1em;
+  /* padding-bottom: 1em; */
   justify-content: center;
   align-items: center;
 `;
@@ -37,7 +38,7 @@ export const Front = styled(animated.div)`
 export const Back = styled(animated.div)`
   display: flex;
   padding-bottom: 1em;
-  background-image: url("https://cdn.dribbble.com/users/51395/screenshots/2859472/pokemon_go_01.gif");
+  background-image: url('https://cdn.dribbble.com/users/51395/screenshots/2859472/pokemon_go_01.gif');
 `;
 
 export const PokeName = styled.span`

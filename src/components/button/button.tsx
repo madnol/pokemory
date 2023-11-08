@@ -1,16 +1,20 @@
-import * as styled from "./button.styled";
+import * as styled from './button.styled';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   onClick: () => void;
-  title: string;
+  title?: string;
+  icon?: string;
+  iconRight?: boolean;
 }
 
 const Button = (props: Props) => {
-  const { title, onClick, ...restProps } = props;
+  const { title, icon, iconRight, onClick, ...restProps } = props;
 
   return (
     <styled.button onClick={onClick} {...restProps}>
-      {title}
+      {!iconRight && icon && <img src={icon} alt="Left icon" />}
+      {title && title}
+      {iconRight && icon && <img src={icon} alt="Right icon" />}
     </styled.button>
   );
 };

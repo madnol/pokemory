@@ -1,23 +1,22 @@
-import { animated } from "@react-spring/web";
-import styled from "styled-components";
+import { animated } from '@react-spring/web';
+import styled from 'styled-components';
 
-export const PlayGround = styled(animated.div)`
-  /* width: 20%; */
+export const Board = styled(animated.div)`
   display: grid;
-  grid-template-rows: repeat(4, 20ch);
-  grid-template-columns: repeat(4, 18ch);
-  grid-gap: 20px;
+  /* justify-items: center; */
+  grid-template-rows: 100px 550px 16ch;
+  grid-template-columns: 1fr 2.05fr;
+  grid-template-areas:
+    'header header'
+    'aside main'
+    'footer footer';
 `;
 
-export const FlippedDeck = styled(animated.div)`
-  overflow: scroll;
-  position: relative;
-  padding: 20px;
-  scroll-behavior: smooth;
-  &::-webkit-scrollbar {
-    width: 0;
-  }
-  height: 22ch;
-  transition: height 0.3s ease-in-out;
-  flex-direction: column;
+export const PlayGround = styled(animated.div)`
+  display: grid;
+  grid-area: main;
+  /* grid-area: main; */
+  grid-template-rows: repeat(4, 14ch);
+  grid-template-columns: repeat(4, 14ch);
+  grid-gap: 10px;
 `;
