@@ -17,7 +17,7 @@ const App = () => {
   });
 
   return (
-    <div style={{ width: '100%' }}>
+    <div style={{ margin: '0 auto' }}>
       <ThemeProvider theme={lightTheme}>
         <GlobalStyle />
         <animated.div style={fade}>
