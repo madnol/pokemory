@@ -17,12 +17,14 @@ const App = () => {
   });
 
   return (
-    <ThemeProvider theme={lightTheme}>
-      <GlobalStyle />
-      <animated.div style={fade}>
-        <Board />
-      </animated.div>
-    </ThemeProvider>
+    <div style={{ width: '100%' }}>
+      <ThemeProvider theme={lightTheme}>
+        <GlobalStyle />
+        <animated.div style={fade}>
+          <Board />
+        </animated.div>
+      </ThemeProvider>
+    </div>
   );
 };
 
