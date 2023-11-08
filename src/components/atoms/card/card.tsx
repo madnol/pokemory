@@ -1,27 +1,23 @@
-import React, {
-  FunctionComponent,
-  useCallback,
-  useEffect,
-  HTMLProps,
-} from "react";
+import React, { FunctionComponent, useCallback, useEffect, HTMLProps } from 'react';
 
-import * as styled from "./card.styled";
-import { useSpring } from "@react-spring/web";
+import { useSpring } from '@react-spring/web';
+
+import * as styled from './card.styled';
+import Skeleton from '../skeleton';
 export interface Props extends HTMLProps<HTMLDivElement> {
   image: string;
-  title?: string;
+  title: string;
   isFlipped: boolean;
   onClick?: () => void;
 }
 
-export const Card: FunctionComponent<Props> = (props: Props) => {
+const Card: FunctionComponent<Props> = (props: Props) => {
   const { image, title, isFlipped, onClick, ...otherProps } = props;
-  // const [flipped, setFlipped] = useState<boolean>(false);
 
   const { opacity, transform } = useSpring({
     opacity: isFlipped ? 1 : 0,
     transform: `perspective(600px) rotateX(${isFlipped ? 180 : 0}deg)`,
-    config: { mass: 5, tension: 500, friction: 80 },
+    config: { mass: 5, tension: 500, friction: 80 }
   });
 
   const handleFlip = useCallback(() => {
@@ -31,19 +27,19 @@ export const Card: FunctionComponent<Props> = (props: Props) => {
 
     console.log();
     // setFlipped(!isFlipped);
-    new Audio("https://www.soundjay.com/misc/sounds/page-flip-01a.mp3").play();
+    new Audio('https://www.soundjay.com/misc/sounds/page-flip-01a.mp3').play();
   }, [isFlipped, onClick, otherProps.id]);
 
   useEffect(() => console.log({ title, isFlipped }), [isFlipped, title]);
 
-  return (
+  return image && title ? (
     <styled.Card onClick={handleFlip} {...otherProps}>
       <styled.Back
         style={{
           opacity: opacity.to((o) => {
             return 1 - o;
           }),
-          transform,
+          transform
         }}
       />
       <styled.Front
@@ -51,13 +47,14 @@ export const Card: FunctionComponent<Props> = (props: Props) => {
           opacity,
           transform: transform.to((t) => {
             return `${t} rotateX(180deg)`;
-          }),
-        }}
-      >
-        {<styled.PokeCard src={image} alt="Card front" />}
+          })
+        }}>
+        <styled.PokeCard src={image} alt="Card front" />
         <styled.PokeName>{title}</styled.PokeName>
       </styled.Front>
     </styled.Card>
+  ) : (
+    <Skeleton width={'100%'} height={'100%'} />
   );
 };
 

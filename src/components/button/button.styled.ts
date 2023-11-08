@@ -1,23 +1,53 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const button = styled.button`
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: background-color 0.3s, box-shadow 0.3s;
-  padding: 1em 2em;
-  border: 0;
-  border-radius: 50px;
-  font-weight: 600;
+  grid-area: header;
+  justify-self: center;
+  width: 130px;
+  height: 40px;
   color: #fff;
-
-  &:hover {
-    background-color: #e54d4d;
-    box-shadow: 0px 6.7px 3.5px rgba(0, 0, 0, 0.012),
-      0px 22.3px 11.8px rgba(0, 0, 0, 0.018), 0px 100px 53px rgba(0, 0, 0, 0.03);
+  border-radius: 50px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow:
+    inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+    7px 7px 20px 0px rgba(0, 0, 0, 0.1),
+    4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  outline: none;
+  background: rgb(22, 9, 240);
+  background: linear-gradient(0deg, rgba(22, 9, 240, 1) 0%, rgba(49, 110, 244, 1) 100%);
+  color: #fff;
+  border: none;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  &:after {
+    position: absolute;
+    content: ' ';
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    -webkit-transform: scale(0.1);
+    transform: scale(0.1);
   }
-  &:active {
-    background-color: #df2020;
+  &:hover {
+    color: #fff;
+    border: none;
+    background: transparent;
+  }
+  &:hover:after {
+    background: rgb(0, 3, 255);
+    background: linear-gradient(0deg, rgba(2, 126, 251, 1) 0%, rgba(0, 3, 255, 1) 100%);
+    -webkit-transform: scale(1);
+    transform: scale(1);
   }
 `;
