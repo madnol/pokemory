@@ -19,7 +19,7 @@ const App = () => {
   return (
     <ThemeProvider theme={lightTheme}>
       <GlobalStyle />
-      <animated.div>
+      <animated.div style={fade}>
         <Board />
       </animated.div>
     </ThemeProvider>

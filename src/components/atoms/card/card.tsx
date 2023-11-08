@@ -49,7 +49,7 @@ const Card: FunctionComponent<Props> = (props: Props) => {
             return `${t} rotateX(180deg)`;
           })
         }}>
-        <styled.PokeCard src={image} alt="Card front" />
+        <styled.PokeCard src={image} alt="pokémon sprite" />
         <styled.PokeName>{title}</styled.PokeName>
       </styled.Front>
     </styled.Card>

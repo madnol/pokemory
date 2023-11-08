@@ -3,7 +3,7 @@ import React, { useCallback } from 'react';
 import * as styled from './flipped-deck.styled';
 import { Pokemon } from '../../types/pokemon/pokemon';
 import Card from '../atoms/card';
-
+import './flipped-deck.style.css';
 export interface Props {
   cards?: Pokemon[];
 }
@@ -24,7 +24,7 @@ const FlippedDeck = (props: Props) => {
   }, []);
 
   return (
-    <styled.FlippedDeck>
+    <styled.FlippedDeck className="masked-overflow">
       {cards?.sort(sortCards)?.map((filterdCard, index) => {
         return (
           <Card
