@@ -1,8 +1,14 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+ html, body, #root   {
+  width: 100vw;
+  height: 100vh;
+ }
+ 
  body {
     font-family: ${({ theme }) => theme.fontFamily};
+
     background-color: ${({ theme }) => '#fff'};
  }
 
@@ -43,6 +49,11 @@ h3{
         padding:1.5rem;
     }
 
+span {
+  font-size: calc(10px + (16 - 10) * ((100vw - 300px) / (1920 - 300)));
+
+}
+    
 p{
         font-size: 1.2rem;
         line-height:200%;

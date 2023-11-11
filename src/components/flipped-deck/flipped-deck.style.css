@@ -4,13 +4,13 @@
   --scrollbar-width: 8px;
 
   /* mask fade distance, for use in mask calculations */
-  --mask-height: 32px;
+  --mask-height: 10em;
 
   /* If content exceeds height of container, overflow! */
   overflow-y: scroll;
   
   /* Our height limit */
-  height: 300px;
+  /* height: 300px; */
 
   /* Need to make sure container has bottom space,
 otherwise content at the bottom is always faded out */
@@ -55,7 +55,7 @@ scroll gradient in the top right */
   mask-repeat: no-repeat, no-repeat;
   
   /* media queries */
-  @media (max-width: 426px){
+  @media (max-width: 769px){
     --mask-size-scrollbar: 0;
      /* mask fade distance, for use in mask calculations */
     --mask-height: 32px;

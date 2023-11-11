@@ -1,29 +1,36 @@
 import { animated } from '@react-spring/web';
+import { url } from 'inspector';
 import styled from 'styled-components';
 
 export const Card = styled.div`
-  --card-skeleton: ;
-  align-items: center;
+  display: flex;
   justify-content: center;
-  width: 14ch;
-  height: 14ch;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  position: relative;
   transition:
     filter 0.5s ease-in-out,
     opacity 0.5s ease-in-out;
-  margin: 0 auto;
+
   &:hover {
     filter: drop-shadow(0 0 0.5rem rgba(63, 81, 181, 0.5));
   }
   & > div {
     position: absolute;
     border-radius: 20px;
-    width: 14ch;
-    height: 14ch;
+    height: 100%;
+    aspect-ratio: 1;
     background-color: #ecf0f1;
-    background-size: cover;
     background-position: center;
     cursor: pointer;
     will-change: transform, opacity;
+
+    @media (max-width: 769px) {
+      width: 100%;
+      aspect-ratio: 1;
+      height: auto;
+    }
   }
 `;
 
@@ -36,8 +43,7 @@ export const Front = styled(animated.div)`
 `;
 
 export const Back = styled(animated.div)`
-  display: flex;
-  padding-bottom: 1em;
+  background-size: cover;
   background-image: url('https://cdn.dribbble.com/users/51395/screenshots/2859472/pokemon_go_01.gif');
 `;
 
@@ -49,7 +55,7 @@ export const PokeName = styled.span`
 `;
 
 export const PokeCard = styled.img`
-  width: 80%;
+  width: 50%;
 `;
 
 export const flipped = styled(animated.div)`

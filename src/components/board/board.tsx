@@ -102,10 +102,10 @@ export const Board: FunctionComponent<Props> = ({ ...otherProps }) => {
     <styled.Board>
       <div
         style={{
-          // background: 'green',
-          gridArea: '1 / 1 / 1 / 3',
+          gridArea: 'header',
 
           display: 'flex',
+          flex: 1,
           justifyContent: 'center',
           alignItems: 'center'
         }}>
