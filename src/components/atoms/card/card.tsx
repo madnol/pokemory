@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useEffect, HTMLProps } from 'react';
+import React, { FunctionComponent, useCallback, HTMLProps } from 'react';
 
 import { useSpring } from '@react-spring/web';
 
@@ -21,16 +21,11 @@ const Card: FunctionComponent<Props> = (props: Props) => {
   });
 
   const handleFlip = useCallback(() => {
-    console.log(otherProps.id);
     if (isFlipped) return;
     onClick && onClick();
-
-    console.log();
     // setFlipped(!isFlipped);
     new Audio('https://www.soundjay.com/misc/sounds/page-flip-01a.mp3').play();
-  }, [isFlipped, onClick, otherProps.id]);
-
-  useEffect(() => console.log({ title, isFlipped }), [isFlipped, title]);
+  }, [isFlipped, onClick]);
 
   return image && title ? (
     <styled.Card onClick={handleFlip} {...otherProps}>

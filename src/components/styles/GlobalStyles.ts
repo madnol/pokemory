@@ -1,6 +1,23 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+  @-webkit-keyframes color-change-2x {
+  0% {
+    background: #19dcea;
+  }
+  100% {
+    background: #b22cff;
+  }
+}
+@keyframes color-change-2x {
+  0% {
+    background: #19dcea;
+  }
+  100% {
+    background: #b22cff;
+  }
+}
+
  html, body, #root   {
   width: 100vw;
   height: 100vh;
@@ -8,8 +25,9 @@ const GlobalStyle = createGlobalStyle`
  
  body {
     font-family: ${({ theme }) => theme.fontFamily};
-
     background-color: ${({ theme }) => '#fff'};
+    -webkit-animation: color-change-2x 2s linear infinite alternate both;
+	        animation: color-change-2x 2s linear infinite alternate both;
  }
 
  h1 {
@@ -38,7 +56,6 @@ body {
     }
 h2 {
         font-size:3rem;
-        font-family: 'Abril Fatface',cursive;
         font-weight:lighter;
         color: #333;
     }
@@ -46,7 +63,6 @@ h2 {
 h3{
         font-size:1.3rem;
         color: #333;
-        padding:1.5rem;
     }
 
 span {

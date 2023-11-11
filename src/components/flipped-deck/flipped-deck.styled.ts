@@ -17,6 +17,8 @@ export const FlippedDeck = styled(animated.div)`
   }
 
   @media (max-width: 769px) {
+    grid-area: footer;
+
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
@@ -24,9 +26,9 @@ export const FlippedDeck = styled(animated.div)`
     height: 11em;
     & > div {
       height: 100%;
+      aspect-ratio: 1;
       display: inline-block;
       margin-left: 20px;
     }
-    grid-area: footer;
   }
 `;

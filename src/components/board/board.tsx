@@ -6,15 +6,18 @@ import { type Pokemon } from '../../types/pokemon/pokemon';
 import Card from '../atoms/card';
 import Button from '../button/button';
 import FlippedDeck from '../flipped-deck';
+import Counter from '../counter';
 
 export interface Props {}
 
 export const Board: FunctionComponent<Props> = ({ ...otherProps }) => {
   const [cards, setCards] = useState<Pokemon[]>();
-  const [, setTurns] = useState(0);
+  const [turns, setTurns] = useState(0);
   const [choiceOne, setChoiceOne] = useState<Pokemon>();
   const [choiceTwo, setChoiceTwo] = useState<Pokemon>();
   const [flippedCards, setFlippedCards] = useState<Pokemon[]>();
+  const [score, setScore] = useState(0);
+  const [consecutive, setConsecutive] = useState(1);
 
   const getSprite = useCallback(async () => {
     const results: Pokemon[] = [];
@@ -36,7 +39,6 @@ export const Board: FunctionComponent<Props> = ({ ...otherProps }) => {
         .sort(() => (Math.random() > 0.5 ? 1 : -1))
         .map((foundedCard, index) => ({ ...foundedCard, id: `${index}` }))
     );
-    setTurns((prevTurns) => prevTurns + 1);
   }, []);
 
   // Handle choice
@@ -51,9 +53,7 @@ export const Board: FunctionComponent<Props> = ({ ...otherProps }) => {
   const resetTurn = useCallback(() => {
     setChoiceOne(undefined);
     setChoiceTwo(undefined);
-    setTurns((prevTurns) => prevTurns + 1);
   }, []);
-  console.log({ choiceOne, choiceTwo });
 
   const handleFlippedCards = useCallback(() => {
     const matchedCards = cards?.filter((card) => card.matched);
@@ -79,16 +79,35 @@ export const Board: FunctionComponent<Props> = ({ ...otherProps }) => {
     }
   }, [choiceOne, choiceTwo, resetTurn]);
 
+  const handleStart = useCallback(() => {
+    getSprite();
+    setTurns(1);
+  }, [getSprite]);
+  const handleRestart = useCallback(() => {
+    getSprite();
+    setScore(0);
+    setConsecutive(0);
+    setTurns((prevTurns) => prevTurns + 1);
+  }, [getSprite]);
+
   useEffect(() => {
     handleFlippedCards();
   }, [handleFlippedCards]);
 
-  // TODO: Mazzo delle coppie di carte trovate
-  //* Il mazzo delle carte deve apparire sulla sinistra
-  //* Le carte vengono mostrate appaiate e quando si va sopra con la freccia si espande verticalmente per mostrare e scrollare le carte trovate
   // TODO: Score
-  //* Va mostrato sulla destra
+  //* Va mostrato sulla destra: DONE
+  //* A ogni coppia trovata aumenta il punteggio
   //* Il punteggio aumenta esponenzialmente quado più copie vengono trovate in successione
+  const handleScore = useCallback(() => {
+    const points = consecutive >= 1 ? consecutive : 1;
+    if (choiceOne && choiceTwo) {
+      choiceOne.name === choiceTwo.name
+        ? setScore((prevScore) => (prevScore >= 1 ? prevScore + points : prevScore + 1))
+        : setConsecutive(1);
+      choiceOne?.name === choiceTwo?.name && setConsecutive((prev) => prev + 1);
+    }
+  }, [choiceOne, choiceTwo, consecutive]);
+
   // TODO: rounds
   //* Va mostrato in basso a destra
   //* Va aggiornato quando l'utente decide di riniziare il gioco
@@ -97,6 +116,9 @@ export const Board: FunctionComponent<Props> = ({ ...otherProps }) => {
   //   fg: bg,
   //   bg: fg,
   // });
+  useEffect(() => {
+    handleScore();
+  }, [handleScore]);
 
   return (
     <styled.Board>
@@ -109,8 +131,21 @@ export const Board: FunctionComponent<Props> = ({ ...otherProps }) => {
           justifyContent: 'center',
           alignItems: 'center'
         }}>
-        <Button style={{ margin: '40px 0', width: '10em' }} title="Start" onClick={getSprite} />
+        <Counter name="Turns" score={turns} />
+
+        {!cards && (
+          <Button style={{ margin: '40px 0', width: '10em' }} title="Start" onClick={handleStart} />
+        )}
+        {cards && (
+          <Button
+            style={{ margin: '40px 0', width: '10em' }}
+            title="restart"
+            onClick={handleRestart}
+          />
+        )}
+        <Counter name="Score" score={score} />
       </div>
+
       <FlippedDeck cards={flippedCards} />
 
       <styled.PlayGround {...otherProps}>

@@ -1,5 +1,4 @@
 import { animated } from '@react-spring/web';
-import { url } from 'inspector';
 import styled from 'styled-components';
 
 export const Card = styled.div`
@@ -26,7 +25,7 @@ export const Card = styled.div`
     cursor: pointer;
     will-change: transform, opacity;
 
-    @media (max-width: 769px) {
+    @media (max-width: 475px) {
       width: 100%;
       aspect-ratio: 1;
       height: auto;
